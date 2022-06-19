@@ -91,21 +91,86 @@ function createObjandReciveDataFromUser(){
     }
 }
 
-
+const objArray = [];
 function creatObjectArray(){
-    const objArray = [{},{},{},{}];
-    
-    let someObj = {
+
+    const userObj = {
         firstName: "" ,
         lastName: "" ,
         dateOfBirth: "" ,
         mail: ""
     }
 
-    let counter = 0
-    for(counter of objArray){
-        objArray[counter] = Object.assign(someObj);
+    for(key in userObj){
+        objArray.push(userObj)
     }
+
+    printObjectArray(objArray)
     console.log(objArray)
+
 }
-creatObjectArray()
+
+function printObjectArray(someArray){
+    let table = document.createElement("table")
+    someArray.forEach(item => {
+        for(key in item){
+            table.innerHTML += "<tbody><tr><td>"+`${key} : `+"</td></tr></tbody>"
+            document.body.append(table)
+        }
+    })
+}
+
+
+
+
+function getLastChar(strArray){
+    return strArray[(strArray.length)-1]
+}
+//1 iteration
+
+const charsArray = ["B","a","t","e","l"]
+const longerCharsArray = ["B","a","t","e","l","H","a","i","y","l","o"]
+
+function printEveryChar(){
+
+    charsArray.forEach( letter => 
+        console.log("first loop output:" + letter) )
+//  5 iteration
+
+    longerCharsArray.forEach( letter => 
+        console.log("second loop output:" + letter) )
+//  11 iteration
+}
+
+function sortNumbersArray(numArr) {
+                
+    for (let i = 0; i < numArr.length; i++) {
+        for (let j = 0; j < numArr.length; j++) {
+            if (numArr[j] > numArr[j + 1]) {
+                let saveBiggeNum = numArr[j];
+                numArr[j] = numArr[j + 1];  //replace spots smaller forword
+                numArr[j + 1] = saveBiggeNum;
+            }
+        }
+    }
+    return numArr;
+}
+const numbersArray = [5, 1, 4, 2, 8];
+console.log(sortNumbersArray(numbersArray));  //[1, 2, 4, 5, 8]
+    
+function binarySearch(numbersArray, wanntedNum) {
+    let smallerNumbers = 0;
+    let biggerNumbers = numbersArray.length - 1;
+    while (smallerNumbers <= biggerNumbers) {
+        const middelNumber = smallerNumbers + Math.floor((biggerNumbers - smallerNumbers) / 2);
+        if (numbersArray[middelNumber] === wanntedNum) {
+            return middelNumber;
+        }
+        if (numbersArray[middelNumber] < wanntedNum) {
+            smallerNumbers = middelNumber + 1;
+        } else {
+            biggerNumbers = middelNumber - 1;
+        }
+    }
+    return -1;
+}
